@@ -1,4 +1,6 @@
 const config = require("./data/SiteConfig");
+const pixrem = require('pixrem');
+const autoprefixer = require('autoprefixer');
 
 const pathPrefix = config.pathPrefix === "/" ? "" : config.pathPrefix;
 
@@ -19,11 +21,17 @@ module.exports = {
   plugins: [
 		"gatsby-plugin-react-helmet",
 		{
-			resolve: `gatsby-plugin-sass`,
-			options: {
-				precision: 8,
-			},
-		},
+      resolve: `gatsby-plugin-postcss-sass`,
+      options: {
+        postCssPlugins: [
+          pixrem(),
+          autoprefixer({
+            browsers: ['last 2 versions']
+          })
+        ],
+        precision: 8
+      }
+    },
     {
       resolve: "gatsby-source-filesystem",
       options: {
