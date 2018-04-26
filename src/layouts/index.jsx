@@ -1,6 +1,7 @@
 import React from "react";
 import Helmet from "react-helmet";
 import config from "../../data/SiteConfig";
+import Nav from "../components/Nav";
 import "../styles/main.scss";
 
 export default class MainLayout extends React.Component {
@@ -46,6 +47,7 @@ export default class MainLayout extends React.Component {
           <title>{`${config.siteTitle} |  ${this.getLocalTitle()}`}</title>
           <meta name="description" content={config.siteDescription} />
         </Helmet>
+				<Nav/>
         {children()}
       </div>
     );

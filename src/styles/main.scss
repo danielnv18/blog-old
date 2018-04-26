@@ -1,24 +1,10 @@
+@import './theme/theme.scss';
+
+// Reassign color vars to semantic color scheme
+$theme-colors: (
+    primary: $color-primary,
+  )
+  !default;
+
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
 
-html,
-body {
-  height: 100%;
-  width: 100%;
-  -webkit-font-smoothing: antialiased;
-}
-
-p {
-  font-size: 16px;
-  line-height: 1.5;
-  margin-bottom: 20px;
-}
-
-img {
-  padding-bottom: 10px;
-  margin-bottom: 15px;
-  max-width: 100%;
-}
-
-img:hover {
-  animation: pulse 0.5s;
-}
