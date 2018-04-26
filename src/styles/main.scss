@@ -1,4 +1,6 @@
 @import './theme/theme.scss';
+@import 'material/variables.scss';
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700|Indie+Flower:400|');
 
 // Reassign color vars to semantic color scheme
 $theme-colors: (
@@ -6,5 +8,43 @@ $theme-colors: (
   )
   !default;
 
+
+
+body {
+  background-color: $body-bg;
+  &.inverse {
+    background: #333333;
+    &, .form-control {
+      color: $mdb-text-color-light;
+    }
+    .modal,
+    .panel-default,
+    .card {
+      &,
+      .form-control {
+        background-color: initial;
+        color: initial;
+      }
+    }
+
+  }
+}
+
+body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
+  font-family: $font-family-sans-serif;
+  font-weight: 300;
+}
+
+h5, h6{
+  font-weight: 400;
+}
+
+a, a:hover, a:focus {
+  color: $link-color;
+
+  & .material-icons {
+    vertical-align: middle;
+  }
+}
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
 
