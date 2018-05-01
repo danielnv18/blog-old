@@ -5,6 +5,7 @@ import Disqus from "../components/Disqus/Disqus";
 import PostTags from "../components/PostTags/PostTags";
 import SocialLinks from "../components/SocialLinks/SocialLinks";
 import SEO from "../components/SEO/SEO";
+import Header from "../components/Header";
 import config from "../../data/SiteConfig";
 import "./b16-tomorrow-dark.css";
 import "./post.css";
@@ -19,23 +20,28 @@ export default class PostTemplate extends React.Component {
     }
     if (!post.category_id) {
       post.category_id = config.postDefaultCategoryID;
-    }
+		}
+		console.log(post)
     return (
       <div>
         <Helmet>
           <title>{`${post.title} | ${config.siteTitle}`}</title>
         </Helmet>
         <SEO postPath={slug} postNode={postNode} postSEO />
-        <div>
-          <h1>{post.title}</h1>
-          <div dangerouslySetInnerHTML={{ __html: postNode.html }} />
-          <div className="post-meta">
-            <PostTags tags={post.tags} />
-            <SocialLinks postPath={slug} postNode={postNode} />
-          </div>
-          <UserInfo config={config} />
-          <Disqus postNode={postNode} />
-        </div>
+				<Header title={post.title} cover={post.cover}/>
+				<article>
+					<div className="container">
+						<div className="row">
+							<div className="col-lg-8 col-md-10 mx-auto">
+								<div dangerouslySetInnerHTML={{ __html: postNode.html }}/>
+								<div className="post-meta">
+									<PostTags tags={post.tags} />
+									<SocialLinks postPath={slug} postNode={postNode} />
+								</div>
+							</div>
+						</div>
+					</div>
+				</article>
       </div>
     );
   }

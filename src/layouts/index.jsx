@@ -2,6 +2,7 @@ import React from "react";
 import Helmet from "react-helmet";
 import config from "../../data/SiteConfig";
 import Nav from "../components/Nav";
+import Header from "../components/Header";
 import "../styles/main.scss";
 
 export default class MainLayout extends React.Component {
@@ -40,14 +41,15 @@ export default class MainLayout extends React.Component {
     return title;
   }
   render() {
-    const { children } = this.props;
+		const { children } = this.props;
+		console.log(this.getLocalTitle())
     return (
       <div>
         <Helmet>
           <title>{`${config.siteTitle} |  ${this.getLocalTitle()}`}</title>
           <meta name="description" content={config.siteDescription} />
         </Helmet>
-				<Nav/>
+				<Nav siteTitle={config.siteTitle}/>
         {children()}
       </div>
     );

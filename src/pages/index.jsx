@@ -3,6 +3,7 @@ import Helmet from "react-helmet";
 import PostListing from "../components/PostListing/PostListing";
 import SEO from "../components/SEO/SEO";
 import config from "../../data/SiteConfig";
+import Header from "../components/Header";
 
 class Index extends React.Component {
   render() {
@@ -11,6 +12,7 @@ class Index extends React.Component {
       <div className="index-container">
         <Helmet title={config.siteTitle} />
         <SEO postEdges={postEdges} />
+				<Header title="Blog" cover="/images/front.jpg"/>
         <PostListing postEdges={postEdges} />
       </div>
     );

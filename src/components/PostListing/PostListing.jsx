@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "gatsby-link";
+import PostTeaser from './../PostTeaser/PostTeaser';
 
 class PostListing extends React.Component {
   getPostList() {
@@ -20,13 +20,15 @@ class PostListing extends React.Component {
   render() {
     const postList = this.getPostList();
     return (
-      <div>
-        {/* Your post list here. */
-        postList.map(post => (
-          <Link to={post.path} key={post.title}>
-            <h1>{post.title}</h1>
-          </Link>
-        ))}
+      <div className="container">
+				<div className="row">
+					<div className="col-lg-8 col-md-10 mx-auto">
+						{
+						postList.map((post, index) => (
+							<PostTeaser post={post} key={index}/>
+						))}
+					</div>
+				</div>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 ---
 title: "Composer and Drupal 8"
-cover: "https://unsplash.it/400/300/?random?BoldMage"
+cover: "/images/cliff-fir-trees-nature-70219.jpg"
 date: "23/04/2018"
 category: "drupal"
 tags:
