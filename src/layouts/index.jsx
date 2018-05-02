@@ -42,7 +42,6 @@ export default class MainLayout extends React.Component {
   }
   render() {
 		const { children } = this.props;
-		console.log(this.getLocalTitle())
     return (
       <div>
         <Helmet>
