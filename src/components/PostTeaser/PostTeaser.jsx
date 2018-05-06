@@ -4,17 +4,16 @@ import "./style.scss";
 
 const PostTeaser = ({post}) => (
 	<div>
-		<div class="post-preview">
+		<div className="post-preview">
 			<Link to={post.path}>
-				<h2 class="post-title">
+				<h2 className="post-title">
 					{post.title}
 				</h2>
 			</Link>
-			<p class="post-subtitle">
+			<p className="post-subtitle">
 				{post.excerpt}
 			</p>
-
-			<p class="post-meta">Posted by on {post.date}</p>
+			<p className="post-meta">Posted on {post.date}</p>
 		</div>
 		<hr/>
 	</div>

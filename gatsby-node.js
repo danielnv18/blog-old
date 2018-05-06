@@ -7,8 +7,19 @@ exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
   let slug;
   if (node.internal.type === "MarkdownRemark") {
     const fileNode = getNode(node.parent);
-    const parsedFilePath = path.parse(fileNode.relativePath);
-    if (
+		const parsedFilePath = path.parse(fileNode.relativePath);
+		if (
+			Object.prototype.hasOwnProperty.call(node, "frontmatter") &&
+			Object.prototype.hasOwnProperty.call(node.frontmatter, "type") &&
+			Object.prototype.hasOwnProperty.call(node.frontmatter, "slug")
+		) {
+			slug = `/${_.kebabCase(node.frontmatter.type)}/${_.kebabCase(node.frontmatter.slug)}`;
+		} else if (
+			Object.prototype.hasOwnProperty.call(node, "frontmatter") &&
+      Object.prototype.hasOwnProperty.call(node.frontmatter, "slug")
+		) {
+			slug = `/${_.kebabCase(node.frontmatter.slug)}`;
+		} else if (
       Object.prototype.hasOwnProperty.call(node, "frontmatter") &&
       Object.prototype.hasOwnProperty.call(node.frontmatter, "title")
     ) {
@@ -20,12 +31,7 @@ exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
     } else {
       slug = `/${parsedFilePath.dir}/`;
     }
-    if (
-      Object.prototype.hasOwnProperty.call(node, "frontmatter") &&
-      Object.prototype.hasOwnProperty.call(node.frontmatter, "slug")
-    ) {
-      slug = `/${_.kebabCase(node.frontmatter.slug)}`;
-    }
+
     createNodeField({ node, name: "slug", value: slug });
   }
 };

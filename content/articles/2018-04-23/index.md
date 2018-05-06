@@ -1,5 +1,7 @@
 ---
 title: "Composer and Drupal 8"
+slug: "Composer Drupal 8"
+type: article
 cover: "/images/cliff-fir-trees-nature-70219.jpg"
 date: "23/04/2018"
 category: "drupal"
