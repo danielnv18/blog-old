@@ -1,6 +1,7 @@
 import React from "react";
 import Helmet from "react-helmet";
 import PostListing from "../components/PostListing/PostListing";
+import Header from "../components/Header";
 import config from "../../data/SiteConfig";
 
 export default class TagTemplate extends React.Component {
@@ -10,6 +11,7 @@ export default class TagTemplate extends React.Component {
     return (
       <div className="tag-container">
         <Helmet title={`Posts tagged as "${tag}" | ${config.siteTitle}`} />
+				<Header title={tag} cover="/images/front.jpg"/>
         <PostListing postEdges={postEdges} />
       </div>
     );

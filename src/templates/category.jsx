@@ -1,6 +1,7 @@
 import React from "react";
 import Helmet from "react-helmet";
 import PostListing from "../components/PostListing/PostListing";
+import Header from "../components/Header";
 import config from "../../data/SiteConfig";
 
 export default class CategoryTemplate extends React.Component {
@@ -12,6 +13,7 @@ export default class CategoryTemplate extends React.Component {
         <Helmet
           title={`Posts in category "${category}" | ${config.siteTitle}`}
         />
+				<Header title={category} cover="/images/front.jpg"/>
         <PostListing postEdges={postEdges} />
       </div>
     );
