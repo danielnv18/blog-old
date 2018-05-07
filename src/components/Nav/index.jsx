@@ -40,7 +40,6 @@ class Nav extends React.Component {
 	render() {
 		const { siteTitle } = this.props;
 		const { navState } = this.state;
-		console.log(navState)
 		return (
 			<nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
 				<div className="container">
