@@ -1,48 +1,64 @@
-const path = require("path");
-const _ = require("lodash");
-const webpackLodashPlugin = require("lodash-webpack-plugin");
+/**
+ * Implement Gatsby's Node APIs in this file.
+ *
+ * See: https://www.gatsbyjs.org/docs/node-apis/
+ */
+const kebabCase = require('lodash.kebabcase');
+const path = require('path');
 
-exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
-  const { createNodeField } = boundActionCreators;
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  const { createNodeField } = actions;
   let slug;
-  if (node.internal.type === "MarkdownRemark") {
+  if (node.internal.type === 'MarkdownRemark') {
     const fileNode = getNode(node.parent);
-		const parsedFilePath = path.parse(fileNode.relativePath);
-		if (
-			Object.prototype.hasOwnProperty.call(node, "frontmatter") &&
-			Object.prototype.hasOwnProperty.call(node.frontmatter, "type") &&
-			Object.prototype.hasOwnProperty.call(node.frontmatter, "slug")
+    const parsedFilePath = path.parse(fileNode.relativePath);
+    if (
+      Object.prototype.hasOwnProperty.call(node, 'frontmatter') &&
+      Object.prototype.hasOwnProperty.call(node.frontmatter, 'type') &&
+      Object.prototype.hasOwnProperty.call(node.frontmatter, 'slug')
 		) {
-			slug = `/${_.kebabCase(node.frontmatter.type)}/${_.kebabCase(node.frontmatter.slug)}`;
-		} else if (
-			Object.prototype.hasOwnProperty.call(node, "frontmatter") &&
-      Object.prototype.hasOwnProperty.call(node.frontmatter, "slug")
-		) {
-			slug = `/${_.kebabCase(node.frontmatter.slug)}`;
-		} else if (
-      Object.prototype.hasOwnProperty.call(node, "frontmatter") &&
-      Object.prototype.hasOwnProperty.call(node.frontmatter, "title")
+			if (node.frontmatter.type === 'page') {
+				slug = `/${kebabCase(node.frontmatter.slug)}`;
+			}
+			else {
+				slug = `/${kebabCase(node.frontmatter.type)}/${kebabCase(
+					node.frontmatter.slug
+				)}`;
+			}
+    } else if (
+      Object.prototype.hasOwnProperty.call(node, 'frontmatter') &&
+      Object.prototype.hasOwnProperty.call(node.frontmatter, 'slug')
     ) {
-      slug = `/${_.kebabCase(node.frontmatter.title)}`;
-    } else if (parsedFilePath.name !== "index" && parsedFilePath.dir !== "") {
+      slug = `/${kebabCase(node.frontmatter.slug)}`;
+    } else if (
+      Object.prototype.hasOwnProperty.call(node, 'frontmatter') &&
+      Object.prototype.hasOwnProperty.call(node.frontmatter, 'title')
+    ) {
+      slug = `/${kebabCase(node.frontmatter.title)}`;
+    } else if (parsedFilePath.name !== 'index' && parsedFilePath.dir !== '') {
       slug = `/${parsedFilePath.dir}/${parsedFilePath.name}/`;
-    } else if (parsedFilePath.dir === "") {
+    } else if (parsedFilePath.dir === '') {
       slug = `/${parsedFilePath.name}/`;
     } else {
       slug = `/${parsedFilePath.dir}/`;
     }
 
-    createNodeField({ node, name: "slug", value: slug });
+    createNodeField({
+      node,
+      name: `slug`,
+      value: slug,
+    });
   }
 };
 
-exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators;
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions;
 
   return new Promise((resolve, reject) => {
-    const postPage = path.resolve("src/templates/post.jsx");
-    const tagPage = path.resolve("src/templates/tag.jsx");
-    const categoryPage = path.resolve("src/templates/category.jsx");
+		const postPage = path.resolve('src/templates/post.js');
+		const pagePage = path.resolve('src/templates/page.js');
+    const tagPage = path.resolve('src/templates/tag.js');
+    const categoryPage = path.resolve('src/templates/category.js');
     resolve(
       graphql(
         `
@@ -52,7 +68,8 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 node {
                   frontmatter {
                     tags
-                    category
+										category
+										type
                   }
                   fields {
                     slug
@@ -65,12 +82,12 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
       ).then(result => {
         if (result.errors) {
           /* eslint no-console: "off" */
-          console.log(result.errors);
+          console.error(result.errors);
           reject(result.errors);
         }
 
         const tagSet = new Set();
-        const categorySet = new Set();
+				const categorySet = new Set();
         result.data.allMarkdownRemark.edges.forEach(edge => {
           if (edge.node.frontmatter.tags) {
             edge.node.frontmatter.tags.forEach(tag => {
@@ -80,45 +97,52 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 
           if (edge.node.frontmatter.category) {
             categorySet.add(edge.node.frontmatter.category);
-          }
+					}
 
-          createPage({
-            path: edge.node.fields.slug,
-            component: postPage,
-            context: {
-              slug: edge.node.fields.slug
-            }
-          });
+					if (edge.node.frontmatter.type === 'page') {
+            createPage({
+							path: edge.node.fields.slug,
+							component: pagePage,
+							context: {
+								slug: edge.node.fields.slug,
+							},
+						});
+					}
+					else if (edge.node.frontmatter.type === 'article') {
+						createPage({
+							path: edge.node.fields.slug,
+							component: postPage,
+							context: {
+								slug: edge.node.fields.slug,
+							},
+						});
+					}
+
+
         });
 
         const tagList = Array.from(tagSet);
         tagList.forEach(tag => {
           createPage({
-            path: `/tags/${_.kebabCase(tag)}/`,
+            path: `/tags/${kebabCase(tag)}/`,
             component: tagPage,
             context: {
-              tag
-            }
+              tag,
+            },
           });
         });
 
         const categoryList = Array.from(categorySet);
         categoryList.forEach(category => {
           createPage({
-            path: `/categories/${_.kebabCase(category)}/`,
+            path: `/categories/${kebabCase(category)}/`,
             component: categoryPage,
             context: {
-              category
-            }
+              category,
+            },
           });
         });
       })
     );
   });
-};
-
-exports.modifyWebpackConfig = ({ config, stage }) => {
-  if (stage === "build-javascript") {
-    config.plugin("Lodash", webpackLodashPlugin, null);
-  }
 };
