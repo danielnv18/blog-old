@@ -24,8 +24,7 @@ parameters:
         debug: true
     }
 ```
-In Drupal 8 you have a more easy way with the DrupalConsole. Just run `drupal site:mode dev.` That will not only
- enable the debug mode in twig, but it will set other options useful for development like disabling cache.
+In Drupal 8 you have a more easy way with the DrupalConsole. Just run `drupal site:mode dev.` That will not only enable the debug mode in twig, but it will set other options useful for development like disabling cache.
 
 Once the debug mode is enable, if you inspect the html you'll be able to see in the html comments all the file suggestions to override the output.
 ```html
@@ -59,7 +58,7 @@ One thing to have in mind is that that preprocess function will run for all the 
 Sometimes the template's recommendations are not enough. In that case, you could use the `hook_theme_suggestions_HOOK_alter.` This hook allows you to add an alternative theme function or template name suggestions. The `HOOK` part will be replaced by the name of the `THEME HOOK` that appears in the HTML comments.
 
 The [documentation](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Render%21theme.api.php/function/hook_theme_suggestions_HOOK_alter/8.5.x) explain it better:
->> HOOK is the least-specific version of the hook being called. For example, if '#theme' => 'node__article' is called, then node_theme_suggestions_node() will be invoked, not node_theme_suggestions_node__article().
+> HOOK is the least-specific version of the hook being called. For example, if '#theme' => '`node__article`' is called, then node_theme_suggestions_node() will be invoked, not `node_theme_suggestions_node__article()`.
 
 For example, let's say that we want to add more suggestions to the view fields. The name of the theme is `views_view_fields.`
 
@@ -74,4 +73,3 @@ function hook_theme_suggestions_views_view_fields_alter(array &$suggestions, arr
 
 ## Sources
 1. https://www.drupal.org/docs/7/theming/template-theme-hook-suggestions
-
