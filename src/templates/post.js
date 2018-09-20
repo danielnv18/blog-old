@@ -1,19 +1,35 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
+import Helmet from 'react-helmet';
 import Layout from '../components/layout';
 
 const PostTemplate = ({ data }) => {
   const post = data.markdownRemark;
+  const site = data.site;
+  const date = new Date(post.frontmatter.date);
+  const locale = 'en-us';
   return (
     <Layout type="post">
+      <Helmet>
+        <title>{`${post.frontmatter.title} | ${
+          site.siteMetadata.title
+        }`}</title>
+      </Helmet>
       <article className="post-full post">
         <header className="post-full-header">
           <section className="post-full-meta">
-            <time className="post-full-meta-date" dateTime="2018-08-20">
-              {post.frontmatter.date}
+            <time
+              className="post-full-meta-date"
+              dateTime={`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`}
+            >
+              {`${date.getDate()} ${date.toLocaleString(locale, {
+                month: 'long',
+              })} ${date.getFullYear()}`}
             </time>
             <span className="date-divider">/</span>{' '}
-            <a href="/tag/getting-started/">{post.frontmatter.category}</a>
+            <Link to={`/categories/${post.frontmatter.category}/`}>
+              {post.frontmatter.category}
+            </Link>
           </section>
           <h1 className="post-full-title">{post.frontmatter.title}</h1>
         </header>
@@ -41,6 +57,11 @@ export const query = graphql`
         category
         date
         cover
+      }
+    }
+    site {
+      siteMetadata {
+        title
       }
     }
   }

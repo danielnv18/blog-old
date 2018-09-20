@@ -16,15 +16,14 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       Object.prototype.hasOwnProperty.call(node, 'frontmatter') &&
       Object.prototype.hasOwnProperty.call(node.frontmatter, 'type') &&
       Object.prototype.hasOwnProperty.call(node.frontmatter, 'slug')
-		) {
-			if (node.frontmatter.type === 'page') {
-				slug = `/${kebabCase(node.frontmatter.slug)}`;
-			}
-			else {
-				slug = `/${kebabCase(node.frontmatter.type)}/${kebabCase(
-					node.frontmatter.slug
-				)}`;
-			}
+    ) {
+      if (node.frontmatter.type === 'page') {
+        slug = `/${kebabCase(node.frontmatter.slug)}`;
+      } else {
+        slug = `/${kebabCase(node.frontmatter.type)}/${kebabCase(
+          node.frontmatter.slug
+        )}`;
+      }
     } else if (
       Object.prototype.hasOwnProperty.call(node, 'frontmatter') &&
       Object.prototype.hasOwnProperty.call(node.frontmatter, 'slug')
@@ -55,8 +54,8 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
 
   return new Promise((resolve, reject) => {
-		const postPage = path.resolve('src/templates/post.js');
-		const pagePage = path.resolve('src/templates/page.js');
+    const postPage = path.resolve('src/templates/post.js');
+    const pagePage = path.resolve('src/templates/page.js');
     const tagPage = path.resolve('src/templates/tag.js');
     const categoryPage = path.resolve('src/templates/category.js');
     resolve(
@@ -68,8 +67,8 @@ exports.createPages = ({ graphql, actions }) => {
                 node {
                   frontmatter {
                     tags
-										category
-										type
+                    category
+                    type
                   }
                   fields {
                     slug
@@ -87,7 +86,7 @@ exports.createPages = ({ graphql, actions }) => {
         }
 
         const tagSet = new Set();
-				const categorySet = new Set();
+        const categorySet = new Set();
         result.data.allMarkdownRemark.edges.forEach(edge => {
           if (edge.node.frontmatter.tags) {
             edge.node.frontmatter.tags.forEach(tag => {
@@ -97,28 +96,25 @@ exports.createPages = ({ graphql, actions }) => {
 
           if (edge.node.frontmatter.category) {
             categorySet.add(edge.node.frontmatter.category);
-					}
+          }
 
-					if (edge.node.frontmatter.type === 'page') {
+          if (edge.node.frontmatter.type === 'page') {
             createPage({
-							path: edge.node.fields.slug,
-							component: pagePage,
-							context: {
-								slug: edge.node.fields.slug,
-							},
-						});
-					}
-					else if (edge.node.frontmatter.type === 'article') {
-						createPage({
-							path: edge.node.fields.slug,
-							component: postPage,
-							context: {
-								slug: edge.node.fields.slug,
-							},
-						});
-					}
-
-
+              path: edge.node.fields.slug,
+              component: pagePage,
+              context: {
+                slug: edge.node.fields.slug,
+              },
+            });
+          } else if (edge.node.frontmatter.type === 'article') {
+            createPage({
+              path: edge.node.fields.slug,
+              component: postPage,
+              context: {
+                slug: edge.node.fields.slug,
+              },
+            });
+          }
         });
 
         const tagList = Array.from(tagSet);

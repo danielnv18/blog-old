@@ -1,11 +1,17 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import Helmet from 'react-helmet';
 import Layout from '../components/layout';
 import PostTeaser from '../components/teaser';
 
 const CategoryTemplate = ({ data }) => {
   return (
     <Layout type="tag">
+      <Helmet>
+        <title>{`${data.frontmatter.category} | ${
+          data.site.siteMetadata.title
+        }`}</title>
+      </Helmet>
       <div className="post-feed">
         {data.allMarkdownRemark.edges.map((post, index) => {
           return <PostTeaser key={index} post={post.node} />;
@@ -36,6 +42,11 @@ export const query = graphql`
             cover
           }
         }
+      }
+    }
+    site {
+      siteMetadata {
+        title
       }
     }
   }
