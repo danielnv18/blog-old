@@ -3,7 +3,7 @@ title: "Overriding a template in Drupal"
 cover: "/images/pexels-photo-1002251.jpeg"
 slug: "Overriding a template Drupal"
 type: article
-date: "19/05/2018"
+date: "05-18-2018"
 category: "drupal"
 tags:
     - drupal
@@ -13,10 +13,10 @@ tags:
     - twig
 ---
 
-If you are doing a Drupal site, there's a big chance you are creating a Drupal theme also. To do that you will need to create your markup. By default in Drupal, you can't see how Drupal is handling the HTML or where the content comes from, but that can easily be changed.
+If you are doing a Drupal site, there's a big chance you are creating a Drupal theme also. To do that, you will need to create your markup. By default in Drupal, you can't see how Drupal is handling the HTML or where the content comes from, but that can easily be changed.
 
 ## Enabled debug mode
-In Drupal 7 this can be done by setting the variable `theme_debug` as true in the settings.php `$conf['theme_debug'] = TRUE;`. In Drupal 8 you'll have to make sure that you have a services.yml in `sites/default` and enable the debug mode in twig.
+In Drupal 7, this can be done by setting the variable `theme_debug` as true in the settings.php `$conf['theme_debug'] = TRUE;`. In Drupal 8, you'll have to make sure that you have a services.yml in `sites/default` and enable the debug mode in twig.
 
 ```yml
 parameters:
@@ -24,9 +24,9 @@ parameters:
         debug: true
     }
 ```
-In Drupal 8 you have a more easy way with the DrupalConsole. Just run `drupal site:mode dev.` That will not only enable the debug mode in twig, but it will set other options useful for development like disabling cache.
+In Drupal 8, you have an easier way to do it, with DrupalConsole. Just run `drupal site:mode dev`. That will not only enable the debug mode in twig, but it will set other options useful for development like disabling cache.
 
-Once the debug mode is enable, if you inspect the html you'll be able to see in the html comments all the file suggestions to override the output.
+Once the debug mode is enabled, if you inspect the html you'll be able to see all the file suggestions to override the output in the html comments.
 ```html
 <!-- THEME DEBUG -->
 <!-- THEME HOOK: 'node' -->
@@ -44,7 +44,7 @@ Once the debug mode is enable, if you inspect the html you'll be able to see in 
 ```
 
 ## Running the process function
-Another thing that the HTML comment tell us is the theme hook. Every preprocess function has a pattern. It combines the machine name of your theme or module, the name of the theme hook and the word preprocess in the middle. If we applied this to the example above, the result would be like:
+Another thing that the HTML comment tell us is the theme hook. Every preprocess function has a pattern. It combines the machine name of your theme or module, the name of the theme hook, and the word preprocess in the middle. If we applied this to the example above, the result would be like:
 
 ```php
 function my_theme_preprocess_node(&$vars) {
@@ -52,7 +52,7 @@ function my_theme_preprocess_node(&$vars) {
 }
 ```
 
-One thing to have in mind is that that preprocess function will run for all the nodes. If you want to run a preprocess function for just one node or one specific content type you only need to follow the same logic of the file suggestions. For example, for all the nodes of type article, the function name would be `my_theme_preprocess_node__article.` For all the teasers would be  `my_theme_preprocess_node__teaser` or for the node #1 the function name would be ` my_theme_preprocess_node__1`. You get the idea, follow the same logic of the file name suggestions.
+One thing to have in mind is that that preprocess function will run for all the nodes. If you want to run a preprocess function for just one node or one specific content type, you only need to follow the same logic of the file suggestions. For example, for all the nodes of type article, the function name would be `my_theme_preprocess_node__article.` For all the teasers would be  `my_theme_preprocess_node__teaser` or for the node #1 the function name would be ` my_theme_preprocess_node__1`. You get the idea, follow the same logic of the file name suggestions.
 
 ## Creating more suggestions
 Sometimes the template's recommendations are not enough. In that case, you could use the `hook_theme_suggestions_HOOK_alter.` This hook allows you to add an alternative theme function or template name suggestions. The `HOOK` part will be replaced by the name of the `THEME HOOK` that appears in the HTML comments.
