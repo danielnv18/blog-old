@@ -4,11 +4,11 @@ import Helmet from 'react-helmet';
 import Layout from '../components/layout';
 import PostTeaser from '../components/teaser';
 
-const CategoryTemplate = ({ data }) => {
+const CategoryTemplate = ({ data, pageContext }) => {
   return (
     <Layout type="tag">
       <Helmet>
-        <title>{`${data.frontmatter.category} | ${
+        <title>{`${pageContext.category} | ${
           data.site.siteMetadata.title
         }`}</title>
       </Helmet>

@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql, Link } from 'gatsby';
 import Helmet from 'react-helmet';
 import Layout from '../components/layout';
+import SEO from '../components/seo';
 
 const PostTemplate = ({ data }) => {
   const post = data.markdownRemark;
@@ -15,6 +16,7 @@ const PostTemplate = ({ data }) => {
           site.siteMetadata.title
         }`}</title>
       </Helmet>
+      <SEO postPath={post.fields.slug} post={post} postSEO />
       <article className="post-full post">
         <header className="post-full-header">
           <section className="post-full-meta">
@@ -52,6 +54,10 @@ export const query = graphql`
   query($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
       html
+      excerpt
+      fields {
+        slug
+      }
       frontmatter {
         title
         category
