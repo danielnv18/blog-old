@@ -29,10 +29,12 @@
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write '**/*.js'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint:md": "remark content/"
   },
   "devDependencies": {
-    "prettier": "^1.14.2"
+    "prettier": "^1.14.2",
+    "remark-cli": "^5.0.0",
+    "remark-preset-lint-recommended": "^3.0.2"
   },
   "repository": {
     "type": "git",
