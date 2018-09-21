@@ -1,19 +1,23 @@
 const config = require('./data/config');
 
+const pathPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix;
+
 module.exports = {
   siteMetadata: {
     title: config.siteTitle,
+    description: config.siteDescription,
   },
   plugins: [
     'gatsby-plugin-react-helmet',
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'gatsby-starter-default',
-        short_name: 'starter',
-        start_url: '/',
-        background_color: '#663399',
-        theme_color: '#663399',
+        name: config.siteTitle,
+        short_name: config.siteTitle,
+        description: config.siteDescription,
+        start_url: config.pathPrefix,
+        background_color: config.backgroundColor,
+        theme_color: config.themeColor,
         display: 'minimal-ui',
         icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
       },
@@ -26,6 +30,25 @@ module.exports = {
         path: `${__dirname}/content/`,
       },
     },
-    'gatsby-transformer-remark',
+    {
+      resolve: 'gatsby-transformer-remark',
+      options: {
+				plugins: [
+					{
+            resolve: "gatsby-remark-images",
+            options: {
+              maxWidth: 840
+            }
+          },
+					'gatsby-remark-autolink-headers',
+					'gatsby-remark-prismjs'],
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-google-analytics',
+      options: {
+        trackingId: config.googleAnalyticsID,
+      },
+    },
   ],
 };

@@ -21,7 +21,7 @@ module.exports = {
   userLinks: [
     {
       label: 'GitHub',
-      url: 'https://github.com/danielnv18/gatsby-advanced-starter',
+      url: 'https://github.com/danielnv18',
       iconClassName: 'fa fa-github',
     },
     {

@@ -818,6 +818,10 @@ The first (most recent) post in the list is styled to be bigger than the others 
     box-shadow: var(--blue) 0 -1px 0 inset;
 }
 
+.post-full-content a.anchor {
+    box-shadow: none;
+}
+
 .post-full-content a:hover {
     color: var(--blue);
     text-decoration: none;
@@ -913,16 +917,9 @@ Usage (In Ghost editor):
 }
 
 .post-full-content pre {
-    overflow-x: auto;
-    margin: 1.5em 0 3em;
-    padding: 20px;
     max-width: 100%;
     border: var(--darkgrey) 1px solid;
-    color: var(--whitegrey);
     font-size: 1.4rem;
-    line-height: 1.5em;
-    background: var(--darkgrey);
-    border-radius: 5px;
 }
 
 .post-full-content pre code {
