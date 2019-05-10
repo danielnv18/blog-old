@@ -1,33 +1,35 @@
-const config = require('./data/config');
-
-const pathPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix;
+const path = require('path');
 
 module.exports = {
   siteMetadata: {
-    title: config.siteTitle,
-    description: config.siteDescription,
+    title: `Daniel Noyola`,
+    description: `Daniel Noyola's blog.`,
+    siteUrl: `https://daniel.noyola.dev`,
+  },
+  mapping: {
+    'MarkdownRemark.frontmatter.author': 'AuthorYaml',
   },
   plugins: [
-    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-sitemap',
+    'gatsby-plugin-sharp',
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: config.siteTitle,
-        short_name: config.siteTitle,
-        description: config.siteDescription,
-        start_url: config.pathPrefix,
-        background_color: config.backgroundColor,
-        theme_color: config.themeColor,
+        name: 'Daniel Noyola',
+        short_name: 'Daniel Noyola',
+        description: `Daniel Noyola's blog.`,
+        start_url: '/',
+        background_color: `#e0e0e0`,
+        theme_color: '#c62828',
         display: 'minimal-ui',
-        icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
+        icon: 'src/icon.png',
       },
     },
-    'gatsby-plugin-offline',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'posts',
-        path: `${__dirname}/content/`,
+        name: 'content',
+        path: path.join(__dirname, 'content'),
       },
     },
     {
@@ -35,20 +37,48 @@ module.exports = {
       options: {
         plugins: [
           {
-            resolve: 'gatsby-remark-images',
+            resolve: 'gatsby-remark-responsive-iframe',
             options: {
-              maxWidth: 840,
+              wrapperStyle: 'margin-bottom: 1rem',
             },
           },
-          'gatsby-remark-autolink-headers',
           'gatsby-remark-prismjs',
+          'gatsby-remark-copy-linked-files',
+          'gatsby-remark-smartypants',
+          'gatsby-remark-abbr',
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 1170,
+              quality: 90,
+            },
+          },
         ],
       },
     },
+    'gatsby-transformer-json',
     {
-      resolve: 'gatsby-plugin-google-analytics',
+      resolve: 'gatsby-plugin-canonical-urls',
       options: {
-        trackingId: config.googleAnalyticsID,
+        siteUrl: 'https://daniel.noyola.dev',
+      },
+    },
+    'gatsby-plugin-emotion',
+    'gatsby-plugin-typescript',
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-react-helmet',
+    'gatsby-transformer-yaml',
+    'gatsby-plugin-feed',
+    {
+      resolve: 'gatsby-plugin-postcss',
+      options: {
+        postCssPlugins: [require('postcss-color-function'), require('cssnano')()],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: 'UA-118055277-1',
       },
     },
   ],
