@@ -1,10 +1,3 @@
-- id: Ghost
-  avatar: avatars/ghost.png
-  bio: The professional publishing platform
-  twitter: TryGhost
-  facebook: ghost
-  website: https://ghost.org/
-  location: On a plane
 - id: danielnv18
   avatar: avatars/me.jpeg
   bio: This is another test author with a profile background image
