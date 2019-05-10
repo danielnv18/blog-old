@@ -5,6 +5,7 @@ author: danielnv18
 permalink: "composer-drupal-8"
 image: img/black-and-white-blur.jpg
 date: 2018-04-23T10:00:00.000Z
+draft: false
 tags:
   - drupal
   - composer

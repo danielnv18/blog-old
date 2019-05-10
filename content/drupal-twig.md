@@ -2,10 +2,10 @@
 author: danielnv18
 layout: post
 title: "Overriding a template in Drupal"
-image: "/images/pexels-photo-1002251.jpeg"
+image: img/pexels-photo-1002251.jpeg
 permalink: "overriding-template-drupal"
-type: article
 date: 2018-05-18T10:00:00.000Z
+draft: false
 tags:
   - drupal
   - theme
