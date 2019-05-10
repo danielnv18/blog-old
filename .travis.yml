@@ -5,10 +5,10 @@ cache:
 notifications:
   email:
     recipients:
-      - daniel@noyola.me
+      - daniel.noyola.dev@gmail.com
     on_failure: always
 node_js:
-  - '8'
+  - '10'
 git:
   depth: 3
 script:
