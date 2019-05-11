@@ -264,7 +264,6 @@ export const pageQuery = graphql`
       website
       twitter
       bio
-      facebook
       github
       location
       profile_image {
