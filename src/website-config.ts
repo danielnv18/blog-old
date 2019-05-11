@@ -56,7 +56,7 @@ const config: WebsiteConfig = {
   title: 'Daniel Noyola',
   description: 'The professional publishing platform',
   coverImage: 'img/blog-cover.jpg',
-  logo: 'img/ghost-logo.png',
+  logo: 'img/logo.png',
   lang: 'en',
   siteUrl: 'https://daniel.noyola.me',
   github: 'https://github.com/danielnv18',
