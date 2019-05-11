@@ -81,5 +81,6 @@ module.exports = {
         trackingId: 'UA-118055277-1',
       },
     },
+    `gatsby-plugin-offline`,
   ],
 };
