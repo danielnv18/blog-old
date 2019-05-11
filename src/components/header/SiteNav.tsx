@@ -7,6 +7,7 @@ import { css } from '@emotion/core';
 import { SocialLink } from '../../styles/shared';
 import config from '../../website-config';
 import Facebook from '../icons/facebook';
+import Github from '../icons/github';
 import Twitter from '../icons/twitter';
 import SubscribeModal from '../subscribe/SubscribeOverlay';
 import SiteNavLogo from './SiteNavLogo';
@@ -174,6 +175,17 @@ class SiteNav extends React.Component<SiteNavProps, SiteNaveState> {
                 rel="noopener noreferrer"
               >
                 <Twitter />
+              </a>
+            )}
+            {config.github && (
+              <a
+                css={SocialLink}
+                href={config.github}
+                title="Github"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github />
               </a>
             )}
           </SocialLinks>

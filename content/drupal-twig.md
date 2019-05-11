@@ -1,5 +1,5 @@
 ---
-author: danielnv18
+author: Daniel Noyola
 layout: post
 title: "Overriding a template in Drupal"
 image: img/pexels-photo-1002251.jpeg
