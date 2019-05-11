@@ -54,7 +54,7 @@ export interface WebsiteConfig {
 
 const config: WebsiteConfig = {
   title: 'Daniel Noyola',
-  description: 'The professional publishing platform',
+  description: `A developer's blog`,
   coverImage: 'img/blog-cover.jpg',
   logo: 'img/logo.png',
   lang: 'en',
