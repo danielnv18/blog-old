@@ -2,9 +2,9 @@ const path = require('path');
 
 module.exports = {
   siteMetadata: {
-    title: `Daniel Noyola`,
-    description: `Daniel Noyola's blog.`,
-    siteUrl: `https://daniel.noyola.dev`,
+    title: 'Daniel Noyola',
+    description: 'Daniel Noyola\'s blog.',
+    siteUrl: 'https://daniel.noyola.me',
   },
   mapping: {
     'MarkdownRemark.frontmatter.author': 'AuthorYaml',
@@ -13,13 +13,13 @@ module.exports = {
     'gatsby-plugin-sitemap',
     'gatsby-plugin-sharp',
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: 'gatsby-plugin-manifest',
       options: {
         name: 'Daniel Noyola',
         short_name: 'Daniel Noyola',
-        description: `Daniel Noyola's blog.`,
+        description: 'Daniel Noyola\'s blog.',
         start_url: '/',
-        background_color: `#e0e0e0`,
+        background_color: '#e0e0e0',
         theme_color: '#c62828',
         display: 'minimal-ui',
         icon: 'src/icon.png',
@@ -60,7 +60,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-canonical-urls',
       options: {
-        siteUrl: 'https://daniel.noyola.dev',
+        siteUrl: 'https://daniel.noyola.me',
       },
     },
     'gatsby-plugin-emotion',
@@ -76,11 +76,11 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: 'gatsby-plugin-google-analytics',
       options: {
         trackingId: 'UA-118055277-1',
       },
     },
-    `gatsby-plugin-offline`,
+    'gatsby-plugin-offline',
   ],
 };
