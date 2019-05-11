@@ -58,7 +58,7 @@ const config: WebsiteConfig = {
   coverImage: 'img/blog-cover.jpg',
   logo: 'img/logo.png',
   lang: 'en',
-  siteUrl: 'https://daniel.noyola.me',
+  siteUrl: 'https://daniel.noyola.dev',
   github: 'https://github.com/danielnv18',
   twitter: 'https://twitter.com/danielnv18',
   showSubscribe: false,

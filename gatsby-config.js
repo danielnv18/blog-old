@@ -4,7 +4,7 @@ module.exports = {
   siteMetadata: {
     title: 'Daniel Noyola',
     description: 'Daniel Noyola\'s blog.',
-    siteUrl: 'https://daniel.noyola.me',
+    siteUrl: 'https://daniel.noyola.dev',
   },
   mapping: {
     'MarkdownRemark.frontmatter.author': 'AuthorYaml',
@@ -60,7 +60,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-canonical-urls',
       options: {
-        siteUrl: 'https://daniel.noyola.me',
+        siteUrl: 'https://daniel.noyola.dev',
       },
     },
     'gatsby-plugin-emotion',
