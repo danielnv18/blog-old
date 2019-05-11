@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Composer and Drupal 8"
-author: danielnv18
+author: Daniel Noyola
 permalink: "composer-drupal-8"
 image: img/black-and-white-blur.jpg
 date: 2018-04-23T10:00:00.000Z
