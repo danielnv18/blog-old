@@ -330,7 +330,7 @@ export const query = graphql`
     logo: file(relativePath: { eq: "img/logo.png" }) {
       childImageSharp {
         fixed {
-          ...GatsbyImageSharpFixed
+          ...GatsbyImageSharpFixed_withWebp
         }
       }
     }
@@ -358,7 +358,7 @@ export const query = graphql`
             children {
               ... on ImageSharp {
                 fixed(quality: 90) {
-                  ...GatsbyImageSharpFixed
+                  ...GatsbyImageSharpFixed_withWebp
                 }
               }
             }
