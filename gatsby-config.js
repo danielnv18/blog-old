@@ -20,7 +20,7 @@ module.exports = {
         description: 'Daniel Noyola\'s blog.',
         start_url: '/',
         background_color: '#e0e0e0',
-        theme_color: '#c62828',
+        theme_color: '#000000',
         display: 'minimal-ui',
         icon: 'src/icon.png',
       },
