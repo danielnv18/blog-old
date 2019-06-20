@@ -1,0 +1,33 @@
+- id: drupalcr_2013
+  name: Drupal Camp CR 2013
+  date: 2013-05-11T10:00:00.000Z
+- id: drupalcr_2014
+  name: Drupal Camp CR 2014
+  date: 2014-05-11T10:00:00.000Z
+- id: drupalcr_2015
+  name: Drupal Camp CR 2015
+  date: 2015-05-11T10:00:00.000Z
+- id: drupalcon_na_2016
+  name: DrupalCon New Orleans 2016
+  website: https://events.drupal.org/neworleans2016/
+  date: 2016-05-11T10:00:00.000Z
+- id: drupalcr_2016
+  name: Drupal Camp CR 2016
+  date: 2016-05-11T10:00:00.000Z
+- id: drupalcon_na_2017
+  name: DrupalCon Baltimore 2017
+  website: https://events.drupal.org/baltimore2017/
+  date: 2017-05-11T10:00:00.000Z
+- id: drupalcr_2017
+  name: Drupal Camp CR 2017
+  date: 2017-05-11T10:00:00.000Z
+- id: drupalcr_2018
+  name: Drupal Camp CR 2018
+  date: 2017-05-11T10:00:00.000Z
+- id: flcamp_2019
+  name: Florida DrupalCamp 2019
+  website: https://www.fldrupal.camp/
+  date: 2019-01-15T10:00:00.000Z
+- id: drupalcr_2019
+  name: Drupal Camp CR 2019
+  date: 2017-05-11T10:00:00.000Z
