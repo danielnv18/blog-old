@@ -43,7 +43,7 @@ const About: React.FunctionComponent = () => {
           website
         }
       }
-      allPresentationYaml(sort: {fields: date, order: DESC}) {
+      allPresentationYaml(sort: {fields: date}) {
         nodes {
           id
           title
@@ -80,6 +80,7 @@ const About: React.FunctionComponent = () => {
 
             <PostFullContent className="post-full-content" css={inner}>
               <div className="post-content">
+                <p>Hello</p>
                 <h2>Certifications</h2>
                 <div className="certifications">
                   {allCertificationYaml.nodes.map(certification => (
@@ -100,10 +101,9 @@ const About: React.FunctionComponent = () => {
                     <ul>
                       {allPresentationYaml.nodes.map(presentation => (
                         <li key={presentation.id} className="event">
-                          <a href={certification.website} target="_blank" rel="noopener noreferrer">
-                            {certification.title}
-                          </a>
-                      : certification.title
+                          <a href={presentation.url} target="_blank" rel="noopener noreferrer">
+                            {presentation.title}
+                          </a> - {presentation.event}
                         </li>
                       ))}
                     </ul>
@@ -120,7 +120,7 @@ const About: React.FunctionComponent = () => {
                   ))}
                 </ul>
                 <blockquote>
-                  <p>Yes!, I have gone to all Drupal CR camps since I started working with Drupal</p>
+                  <p>Yes! I have gone to all Drupal CR camps since I started working with Drupal</p>
                 </blockquote>
                 <p>
                   <img src="https://association.drupal.org/files/Drupal_Association_ind_member_217.png" />

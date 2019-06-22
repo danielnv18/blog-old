@@ -1,0 +1,25 @@
+- id: estado-drupal8
+  title: El estado de Drupal 9
+  url: https://docs.google.com/presentation/d/1S_d1dZboS4rj5HFaiCyxsVkDp5nbaiHfzIoEbBBo-KM/edit?usp=sharing
+  event: DrupalCamp CR 2019
+  date: 2019-09-11T10:00:00.000Z
+- id: jsonapi
+  title: JSON APi
+  url: https://danielnv18.github.io/jsonapi-presentation/
+  event: DrupalCamp CR 2018
+  date: 2018-05-11T10:00:00.000Z
+- id: drupal-composer
+  title: Creando sitio en composer en Drupal8
+  url: https://slides.com/dnoyola/composer-drupal
+  event: DrupalCamp CR 2017
+  date: 2017-05-11T10:00:00.000Z
+- id: drupal8-intro
+  title: Taller - Introduccion a Drupal 8
+  url: https://slides.com/dnoyola/intro-drupal-8
+  event: DrupalCamp CR 2017
+  date: 2017-05-11T10:00:00.000Z
+- id: behat-bdd
+  title: Behat and BDD
+  url: https://danielnv18.github.io/presentation-behat/
+  event: DrupalCamp CR 2016
+  date: 2016-05-11T10:00:00.000Z
