@@ -4,7 +4,7 @@ import SiteNav from '../components/header/SiteNav';
 import { SiteHeader, outer, inner, SiteMain } from '../styles/shared';
 import * as React from 'react';
 import { css } from '@emotion/core';
-
+import { useStaticQuery, graphql } from 'gatsby';
 import { PostFullHeader, PostFullTitle, NoImage, PostFull } from '../templates/post';
 import { PostFullContent } from '../components/PostContent';
 import Footer from '../components/Footer';
@@ -15,68 +15,124 @@ const PageTemplate = css`
     background: #fff;
     padding-bottom: 4vw;
   }
+  .certifications {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 3rem;
+    width: 100%;
+  }
+  .post-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 920px;
+  }
+  .events {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
-const About: React.FunctionComponent = () => (
-  <IndexLayout>
-    <Helmet>
-      <title>About</title>
-    </Helmet>
-    <Wrapper css={PageTemplate}>
-      <header css={[outer, SiteHeader]}>
-        <div css={inner}>
-          <SiteNav />
-        </div>
-      </header>
-      <main id="site-main" className="site-main" css={[SiteMain, outer]}>
-        <article className="post page" css={[PostFull, NoImage]}>
-          <PostFullHeader>
-            <PostFullTitle>About</PostFullTitle>
-          </PostFullHeader>
+const About: React.FunctionComponent = () => {
+  const { allCertificationYaml, allEventYaml, allPresentationYaml } = useStaticQuery(graphql`
+    {
+      allCertificationYaml {
+        nodes {
+          id
+          title
+          website
+        }
+      }
+      allPresentationYaml(sort: {fields: date, order: DESC}) {
+        nodes {
+          id
+          title
+          event
+          url
+        }
+      }
+      allEventYaml {
+        nodes {
+          id
+          name
+          website
+        }
+      }
+    }
+  `);
 
-          <PostFullContent className="post-full-content">
-            <div className="post-content">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc commodo finibus leo,
-                non tempus magna vehicula ac. Maecenas mollis ante finibus pharetra imperdiet.
-                Maecenas in aliquam purus. Nam et massa a nulla fermentum dapibus sit amet in neque.
-                Ut ipsum ipsum, rhoncus a sodales pellentesque, interdum a elit. Nullam aliquam
-                tellus nibh, eget laoreet dui aliquet non. Vestibulum malesuada ante at diam tempus,
-                ac interdum risus scelerisque. Sed ipsum neque, vulputate porta diam eget, consequat
-                blandit nulla. Integer volutpat velit vitae purus lacinia aliquam. Integer bibendum
-                ipsum vitae magna pulvinar, nec vehicula dolor vulputate. Nulla eu massa id orci
-                placerat finibus vel sit amet eros. Vestibulum quis consequat massa. Sed sagittis
-                sollicitudin massa at commodo. Praesent diam nisi, imperdiet posuere eleifend nec,
-                blandit ac massa.
-              </p>
-              <p>
-                Vestibulum semper pretium ipsum nec congue. Ut ac eros nisi. Donec leo sem, aliquam
-                mollis sapien ultrices, dapibus congue diam. Proin viverra dapibus blandit. Ut
-                mauris tellus, tristique id felis vel, venenatis vestibulum nunc. Nam molestie
-                pulvinar nibh, eget egestas augue. Maecenas tellus arcu, mattis ut ipsum non,
-                sollicitudin convallis nunc. Donec nec neque tristique, aliquet lacus id, laoreet
-                nunc. Cras dapibus nisi nulla, ullamcorper faucibus neque suscipit ac. Donec eget
-                orci venenatis justo lobortis volutpat. Proin vel placerat nisl. Integer arcu nunc,
-                sodales eu fringilla non, aliquam non diam. Cras placerat, massa et faucibus
-                pretium, ante elit tincidunt tellus, tristique ultricies velit quam et massa.
-              </p>
-              <p>
-                In nunc lacus, dapibus vitae lacus sit amet, efficitur iaculis neque. Suspendisse ut
-                tellus quis leo vestibulum tincidunt. Aenean nec enim ac dolor lacinia semper. Ut
-                sed laoreet libero. Nunc elementum sollicitudin accumsan. Nunc eu augue neque. Proin
-                a tortor nibh. Cras eu nisl ornare sapien feugiat pellentesque. Mauris dignissim vel
-                quam eu pellentesque. Integer sit amet posuere quam, eu ullamcorper odio. Nullam a
-                lacus tempus sapien dignissim ullamcorper. In hac habitasse platea dictumst. Proin
-                quis massa aliquam, feugiat tortor sit amet, tincidunt urna. Donec posuere pulvinar
-                lectus, ac semper ipsum vulputate quis.
-              </p>
-            </div>
-          </PostFullContent>
-        </article>
-      </main>
-      <Footer />
-    </Wrapper>
-  </IndexLayout>
-);
+  return (
+    <IndexLayout>
+      <Helmet>
+        <title>About | Daniel Noyola</title>
+      </Helmet>
+      <Wrapper css={PageTemplate}>
+        <header css={[outer, SiteHeader]}>
+          <div css={inner}>
+            <SiteNav />
+          </div>
+        </header>
+        <main id="site-main" className="site-main" css={[SiteMain, outer]}>
+          <article className="post page" css={[PostFull, NoImage]}>
+            <PostFullHeader>
+              <PostFullTitle>About me</PostFullTitle>
+            </PostFullHeader>
+
+            <PostFullContent className="post-full-content" css={inner}>
+              <div className="post-content">
+                <h2>Certifications</h2>
+                <div className="certifications">
+                  {allCertificationYaml.nodes.map(certification => (
+                    <div key={certification.id} className="certification">
+                      {certification.website ?
+                        <a href={certification.website} target="_blank" rel="noopener noreferrer">
+                          {certification.title}
+                        </a> :
+                        certification.title
+                      }
+                    </div>
+                  ))}
+                </div>
+                {allPresentationYaml.nodes ?
+                  <>
+                    <h2>Presentations</h2>
+                    <p>A list of Presentations I have given over the years</p>
+                    <ul>
+                      {allPresentationYaml.nodes.map(presentation => (
+                        <li key={presentation.id} className="event">
+                          <a href={certification.website} target="_blank" rel="noopener noreferrer">
+                            {certification.title}
+                          </a>
+                      : certification.title
+                        </li>
+                      ))}
+                    </ul>
+                  </> :
+                  null}
+                <h2>Events</h2>
+                <ul className="events">
+                  {allEventYaml.nodes.map(event => (
+                    <li key={event.id} className="event">
+                      {event.website ? <a href={event.website} target="_blank" rel="noopener noreferrer">{event.name}</a> :
+                        event.name
+                      }
+                    </li>
+                  ))}
+                </ul>
+                <blockquote>
+                  <p>Yes!, I have gone to all Drupal CR camps since I started working with Drupal</p>
+                </blockquote>
+                <p>
+                  <img src="https://association.drupal.org/files/Drupal_Association_ind_member_217.png" />
+                </p>
+              </div>
+            </PostFullContent>
+          </article>
+        </main>
+        <Footer />
+      </Wrapper>
+    </IndexLayout>
+  );
+};
 
 export default About;
