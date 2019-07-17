@@ -1,6 +1,6 @@
 import { graphql, StaticQuery } from 'gatsby';
 import * as React from 'react';
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 import config from '../../website-config';
 
@@ -27,7 +27,7 @@ const SubscribeLogo = () => (
           childImageSharp {
             # Specify the image processing specifications right in the query.
             # Makes it trivial to update as your page's design changes.
-            fixed {
+            fixed(width: 300) {
               ...GatsbyImageSharpFixed_withWebp
             }
           }

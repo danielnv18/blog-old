@@ -40,7 +40,7 @@ const SiteNavLogo = () => (
       query HeadingQuery {
         logo: file(relativePath: { eq: "img/logo.png" }) {
           childImageSharp {
-            fixed {
+            fixed(width: 300) {
               ...GatsbyImageSharpFixed_withWebp
             }
           }
