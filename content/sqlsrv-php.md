@@ -3,7 +3,7 @@ author: Daniel Noyola
 layout: post
 title: 'Working with SQL server in PHP projects'
 image: img/dock.jpg
-date: 2019-05-17T10:00:00.000Z
+date: 2019-08-25T02:00:00.000Z
 tags:
   - php
   - sqlsrv
